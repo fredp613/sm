@@ -1,0 +1,14 @@
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div id='flash' data-alert class="alert-box round <%= name.to_s == 'notice' ? 'info' : 'alert' %>">
+      <%= content_tag :div, msg %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
+

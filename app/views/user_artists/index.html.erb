@@ -1,0 +1,52 @@
+<h1><%= @contents.first.artist.artist_name + " - " + "All content" %></h1>
+<%= link_to "Unfollow", user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: @contents.first.artist_id).first.id, show: true), method: 'delete', class: "button radius round tiny following_state btnFollow info", remote: true %>
+
+
+<div class='row'>
+  <div id='user_artists_posts' class="user_artists_posts active" id="panel2-1">      
+      <%#= render 'user_artists_content' %>
+      <%= render 'home/scoped_contents_artist' %>
+  </div>
+ </div>
+
+
+
+
+<p>
+  <div class='pagination_scroll row large-12 columns' style='margin-top:30px;'>
+    <%= render 'home/pagination' %>
+  </div>
+</p>
+
+<script type="text/javascript">
+
+
+// toggleScroll("user_artists_posts", "artist_post");
+
+  // $element_artist = $('#user_artists_posts')
+
+  //   $element_artist.infinitescroll({
+   
+  //     navSelector  : "nav.pagination",            
+  //                    // selector for the paged navigation (it will be hidden)
+  //     nextSelector : "nav.pagination a[rel=next]",    
+  //                    // selector for the NEXT link (to page 2)
+  //     itemSelector : "#user_artists_posts div.artist_post",
+
+  //     loading: {          
+  //           img: '../assets/loading.gif',                              
+  //           finished: undefined,
+  //           msgText: "",
+  //           finishedMsg: "",
+  //           selector: '#loader',
+  //           speed: 'fast'
+  //     }
+
+     
+  //  });
+
+
+
+
+
+</script>

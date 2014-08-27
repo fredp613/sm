@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ig:</strong>
+  <%= @instagramposter.ig_id %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @instagramposter.screen_name %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @instagramposter.artist.artist_name %>
+</p>
+
+<p>
+  <strong>Profile Image:</strong>
+  <%= image_tag @instagramposter.profile_image %>
+</p>
+
+<%= link_to 'Edit', edit_admin_instagramposter_path(@instagramposter) %> |
+<%= link_to 'Back', admin_instagramposters_path %>

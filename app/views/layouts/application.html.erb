@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "RapLife" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
+    
+    <script type="text/javascript" data-turbolinks-eval=false>
+      // function toggleScroll(id, selector) {
+      //     $element = $(document).find('#'+id)
+
+      //     $element.infinitescroll({
+         
+      //       navSelector  : "nav.pagination",            
+      //                      // selector for the paged navigation (it will be hidden)
+      //       nextSelector : "nav.pagination a[rel=next]",    
+      //                      // selector for the NEXT link (to page 2)
+      //       // itemSelector : '"#posts" div.post',
+      //       itemSelector : "#"+id + " " + "div."+selector,
+
+      //       loading: {          
+      //             img: '../assets/loading.gif',                              
+      //             finished: undefined,
+      //             msgText: "",
+      //             finishedMsg: "",
+      //             selector: '#loader',
+      //             speed: 'fast'
+      //         }         
+      //      });
+      // }
+    </script> 
+    
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+   <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+       
+      <li class="name">
+        <h1>
+          <a href="/">
+            Rap Life
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+ 
+    
+   
+    <section class="top-bar-section">
+    <% if user_signed_in? %>   
+      <ul>
+         <li class="has-dropdown">
+          <a class="active" href="#">Dashboard</a>
+            <ul class="dropdown">
+              <li><label>Favorites</label></li>
+              <li><%= link_to "Artists", artist_index_user_artists_path %></li>
+              <li><%= link_to "Content", user_contents_path %></li>
+                                                       
+            </ul>
+        </li>
+
+      </ul>
+ 
+      <% end %>
+
+      <ul >
+        <li class="divider"></li>        
+              <%= render 'home/search_form' %>                       
+      </ul>
+    </section>
+
+    
+    <% if user_signed_in? %>
+    <section class="top-bar-section">          
+      <ul >
+      <li class="divider"></li>        
+      <div class='count'>
+        <%= render 'layouts/counts' %>
+      </div>    
+      </ul>
+    </section>
+    <% end %>
+
+
+
+    <section class="top-bar-section">
+           <%= render 'home/authentication' %>
+      
+    </section>
+  </nav>
+  
+  <div class="row full-width" style='margin-top:80px'>
+    <%# Rails flash messages styled for Zurb Foundation %>      
+        <div id='flash_messages'><%= render 'layouts/messages' %></div>
+    <%= yield %>
+    
+    <div id='loader' class='row large-12' style='margin-left:auto;margin-right:auto;text-align:center;'></div>
+ 
+  </div>
+ 
+
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    
+    <%# = javascript_include_tag "application" %>
+  </body>
+</html>
+
+

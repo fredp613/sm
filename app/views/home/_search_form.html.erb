@@ -1,0 +1,22 @@
+   
+
+<%= form_tag home_index_path, :method=>'GET', :id=>'frmSearch' do  %>
+<li class="has-form large-3 columns"> 
+          <div class="row collapse"> 
+
+   <div class="large-8 medium-6 small-6 columns"> 
+      <!-- <input type="text" placeholder="search anything">      -->
+      <%= text_field_tag "search_field", nil, placeholder: "search anything...", value: params[:search_field] %>
+  </div> 
+  <div class="large-2 medium-3 small-3 columns"> 
+    <%= submit_tag "Search", id: 'btnSearch', name: 'search', class: "button expand" %>    
+  </div>
+  <div class="large-2 medium-3 small-3 columns">
+  	<%= submit_tag "Clear", id: 'btnClear',  name: 'clear', class: "alert button expand" %> 
+  </div>
+ </div>
+ </li> 
+
+ <% end %>
+
+ 

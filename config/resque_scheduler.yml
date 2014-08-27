@@ -1,0 +1,7 @@
+every_10_secs:
+   # cron: "0 0 * * *"
+   class: BackgroundProcess
+   args: 
+   queue: jobs_queue
+   description: Tasks to perform every 5seconds
+   every : 10s

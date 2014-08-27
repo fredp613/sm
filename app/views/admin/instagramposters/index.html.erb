@@ -1,0 +1,31 @@
+<h1>Listing instagramposters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ig</th>
+      <th>Screen name</th>
+      <th>Poster</th>
+      <th>Profile Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @instagramposters.each do |instagramposter| %>
+      <tr>
+        <td><%= instagramposter.ig_id %></td>
+        <td><%= instagramposter.screen_name %></td>
+        <td><%= instagramposter.artist.artist_name %></td>
+        <td><%= image_tag instagramposter.profile_image %></td>
+        <td><%= link_to 'Show', admin_instagramposter_path(instagramposter) %></td>
+        <td><%= link_to 'Edit', edit_admin_instagramposter_path(instagramposter) %></td>
+        <td><%= link_to 'Destroy', admin_instagramposter_path(instagramposter), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Instagramposter', new_admin_instagramposter_path %>

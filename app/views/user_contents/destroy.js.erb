@@ -1,0 +1,10 @@
+
+
+$("." + "<%= @user_content.content.id %>").html("<%= j render partial: 'home/action_buttons', locals: { :c => @user_content.content } %>")
+$("#buttons_for_" + "<%= @user_content.content.id %>").html("<%= j render partial: 'home/action_buttons_scoped', locals: { :c => @user_content.content } %>")
+
+$("#" + "<%= @user_content.content_id %>").html("")
+
+
+$(".count").html("<%= escape_javascript(render('layouts/counts')) %>");
+$("#flash_messages").html("<%= escape_javascript(render('layouts/messages')) %>");

@@ -1,0 +1,41 @@
+
+<% @user_artists.each do |c| %>
+  
+<div id='timeline1' class='artist_post large-4 columns'>
+  <div class="panel">                                 
+      <%= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+        <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+        <h6><%= c.created_at.to_date %></h6>        
+        <blockquote  style='text-overflow: ellipsis;'><%= c.text %></blockquote>            
+      <% end %>
+        <% if user_signed_in? %>
+           <% if c.following(current_user) == true %>
+             <%= button_tag :following, class: "button radius round tiny disabled btnFollow #{c.artist_id}", 
+             'data-user' => current_user.id,'data-artist' => c.artist.id %>
+           <% else %>
+             <%= button_tag :follow, class: "button radius round tiny btnFollow #{c.artist_id}", 'data-user' => current_user.id, 
+             'data-artist' => c.artist.id %>
+           <% end %>
+
+           <% if c.favorite(current_user) == true %>
+
+           <%= button_tag "saved to favorites", class: "button radius round tiny info disabled btnFavorite",id: "#{c.id}fav", 'data-user' => current_user.id, 
+             'data-content' => c.id %>            
+           <% else %>
+           <%= button_tag "Add to favorites", class: "button radius round tiny success btnFavorite", id: "#{c.id}fav",'data-user' => current_user.id, 'data-content' => c.id %>
+           <% end %>
+         <% end %>
+
+        <p>
+
+    <%= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+      <%= image_tag c.image_url(:main).to_s %>
+    <% end %>
+    </p>
+  </div>
+ </div>
+
+
+ <% end %>
+
+ <%= render 'layouts/modal' %>

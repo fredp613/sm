@@ -1,0 +1,63 @@
+
+
+<% @contents.each do |c| %>
+
+<div id='timeline' class='post large-4 columns' >
+
+ 	<div class="panel contents" style='display:block'>			 							              
+ 	<!-- link to below is to activate modal -->
+ 	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+ 	<%= link_to "#",  remote: true do %>
+       	<h4><%= c.artist.artist_name %></h4>
+        <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+        <h6><%= c.created_at.to_date %></h6>        
+        <blockquote  style='text-overflow: ellipsis;'><%= c.text %></blockquote>		        
+     <% end %>  
+        <% if user_signed_in? %>	         
+
+	          <% if c.favorite(current_user.id) == true %>
+
+            <% if params[:artist_id] %>
+                <%= link_to "Remove from favorites", user_content_path(UserContent.where(:user_id=>current_user.id).where(:content_id=>c.id).first.id, :scoped_favorite=>true, artist_id: c.artist_id), 
+                method: 'delete', class: 'button radius round tiny info', remote: true %> 
+            <% else  %>
+                <%= link_to "Remove from favorites", user_content_path(UserContent.where(:user_id=>current_user.id).where(:content_id=>c.id).first.id, :scoped_favorite=>true), 
+                method: 'delete', class: 'button radius round tiny info', remote: true %> 
+            <% end %>
+
+             <% else %>
+            
+
+             <%= link_to "Add to favorites", user_contents_path(user_content: 
+             {user_id: current_user.id, content_id: c.id, artist_id: c.artist_id},:scoped_favorite=>true), 
+             method: 'post', action: :create, class: 'button radius round tiny success', remote: true %>
+
+           <% end %>
+
+         <% end %>
+        <p>
+        <%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+			<%= image_tag c.image_url(:main).to_s %>
+		<%# end %>
+		</p>
+	</div>
+</div>	 							              
+ <% end %>
+
+
+ 
+<%= render 'layouts/modal' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

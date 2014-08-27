@@ -1,0 +1,62 @@
+
+
+
+
+<% @contents.each do |c| %>
+	
+<div id='timeline' class='post large-4 columns'>
+
+ 	<div class="panel">			 							              
+ 	<!-- link to below is to activate modal -->
+ 	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+ 	<%= link_to "#",  remote: true do %>
+       	<h4><%= c.artist.artist_name %></h4>
+        <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+        <h6><%= c.created_at.to_date %></h6>        
+        <blockquote  style='text-overflow: ellipsis;'><%= c.text %></blockquote>		        
+     <% end %>  
+        <% if user_signed_in? %>
+	         <% if c.following(current_user.id) == true %>
+		         <%= link_to "following", "#", 'data-id' => UserArtist.get_id_from_content(current_user.id, c.artist_id),  class: "button radius round tiny following_state btnFollow info", 
+		         'data-user' => current_user.id,'data-artist' => c.artist.id %>
+	         <% else %>
+		         <%= link_to "follow", "#" ,class: "button radius round tiny alert btnFollow", 'data-user' => current_user.id, 
+		        'data-artist' => c.artist_id, 'data-id'=>"none" %>
+	         <% end %>
+
+	         <% if c.favorite(current_user.id) == true %>
+
+		         <%= button_tag "Saved to favorites", class: "button radius round tiny info favorite_state btnFavorite",id: c.id, 
+		         'data-user' => current_user.id, 
+			       'data-content' => c.favorite_item(c.id, current_user.id) %>	         	
+		         <% else %>
+		         <%= button_tag "Add to favorites", class: "button radius round tiny success btnFavorite", id: c.id,'data-user' => current_user.id, 'data-content' => c.id %>
+		         <% end %>
+         <% end %>
+         
+        <p>
+        <%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+			<%= image_tag c.image_url(:main).to_s %>
+		<%# end %>
+		</p>
+	</div>
+</div>	 							              
+ <% end %>
+
+
+ 
+<%= render 'layouts/modal' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+<blockquote style='color:white;word-wrap:break-word'><%= c.text.split[0..20].join(' ') %>
+ <% if c.text.split.any? { |s| s.length > 20 } %>
+  ...
+ <% end %>
+</blockquote>
+<div style='clear:both'></div>
+ <p class='large-12 columns text-center'>
+    <% if c.following(current_user) == true %>
+
+
+    <%= link_to "following", user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: c.artist_id).first.id), method: 'delete', class: "button radius round tiny following_state info", 
+   remote: true %>
+
+     <% else %>
+
+        <%= link_to "follow", user_artists_path(user_artist: {user_id: current_user, artist_id: c.artist_id}),  method: 'post', action: :create, class: "button radius round tiny alert ", remote: true %>
+     <% end %>
+
+     <% if c.favorite(current_user.id) == true %>
+
+
+    <%= link_to "Saved to favorites", user_content_path(UserContent.where(:user_id=>current_user.id).where(:content_id=>c.id).first.id), 
+    method: 'delete', class: 'button radius round tiny info', remote: true %> 
+
+     <% else %>
+
+
+     <%= link_to "Add to favorites", user_contents_path(user_content: {user_id: current_user.id, content_id: c.id }), method: 'post', action: :create, class: 'button radius round tiny success', remote: true %>
+
+     <% end %>
+  </p>
+ <div style='clear:both'></div>

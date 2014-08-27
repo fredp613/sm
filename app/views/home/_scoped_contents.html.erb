@@ -1,0 +1,45 @@
+
+<% @contents.each do |c| %>
+
+<div id='<%= c.id %>' class='post large-4 columns' >
+
+ 	<div class="panel contents" style='display:block'>			 							              
+ 	<!-- link to below is to activate modal -->
+ 	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+ 	<%= link_to "#",  remote: true do %>
+       	<h4><%= c.artist.artist_name %></h4>
+        <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+        <h6><%= c.created_at.to_date %></h6>        
+        <blockquote  style='text-overflow: ellipsis;'><%= c.text %></blockquote>		        
+     <% end %>  
+        <% if user_signed_in? %>	         
+
+	        <div id='buttons_for_<%= c.id %>' class='action_buttons_scoped'><%= render 'home/action_buttons_scoped', :c => c %></div>
+
+         <% end %>
+        <p>
+        <%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+			<%= image_tag c.image_url(:main).to_s %>
+		<%# end %>
+		</p>
+	</div>
+</div>	 							              
+ <% end %>
+
+
+ 
+<%= render 'layouts/modal' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

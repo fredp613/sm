@@ -1,0 +1,60 @@
+
+
+<% @contents.each do |c| %>
+	
+<div id='timeline' class='post large-4 columns'>
+
+ <div class="panel contents" style='display:block;'>			 
+  						              
+ 	<!-- link to below is to activate modal -->
+ 	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+         
+ 	   <!--  <div class='action_buttons' style='margin:30% 20%;position:absolute'> -->
+        <% if user_signed_in? %>
+         
+          <div class='action_buttons <%= c.id %>' style='color:white;background:rgba(0,0,0,0.7);margin:30% 16%;width:300px;position:absolute'>
+
+         <%= render partial: "home/action_buttons", locals: { :c => c }  %>
+        
+         
+          </div>
+      <% end %>
+     <!-- </div>  -->
+
+      <div class='post_image'>
+        <%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
+    			<%= image_tag c.image_url(:main).to_s, class: '.test' %>
+    		<%# end %>              
+  		</div>
+      <p class='bottom-info'>
+            <%= link_to user_artists_path(artist_id: c.artist.id) do %>
+              <h4><%= c.artist.artist_name %></h4>
+              <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+              <h6><%= c.created_at.to_date %></h6>                
+            <% end %> 
+        </p>
+      
+
+  
+	</div>
+</div>
+
+ <% end %>
+
+
+ 
+<%= render 'layouts/modal' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

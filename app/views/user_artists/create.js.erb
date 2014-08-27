@@ -1,0 +1,4 @@
+$("."+"<%= @user_artist.artist_id %>").html("<%= escape_javascript(link_to 'following', user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: @user_artist.artist_id).first.id), method: 'delete', class: 'button radius round tiny following_state info', 
+           remote: true) %>")
+$(".count").html("<%= escape_javascript(render('layouts/counts')) %>");
+$("#flash_messages").html("<%= escape_javascript(render('layouts/messages')) %>");

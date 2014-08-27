@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @twitterposter.user_id %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @twitterposter.screen_name %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @twitterposter.artist.artist_name %>
+</p>
+
+<p>
+  <strong>Profile Image:</strong>
+  <%= image_tag @twitterposter.profile_image %>
+</p>
+
+<%= link_to 'Edit', edit_admin_twitterposter_path(@twitterposter) %> |
+<%= link_to 'Back', admin_twitterposters_path %>

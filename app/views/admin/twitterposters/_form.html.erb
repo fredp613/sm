@@ -1,0 +1,36 @@
+<%= form_for [:admin, @twitterposter] do |f| %>
+  <% if @twitterposter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@twitterposter.errors.count, "error") %> prohibited this twitterposter from being saved:</h2>
+
+      <ul>
+      <% @twitterposter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :screen_name %><br>
+    <%= f.text_field :screen_name %>
+  </div>
+  <div class="field">
+    <%= f.label :artist_id %><br>
+    <%= f.select :artist_id, Artist.all.collect{ |u| [u.artist_name, u.id] }, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :remote_profile_image_url %><br>
+    <%= f.text_field :remote_profile_image_url %>    
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

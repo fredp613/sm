@@ -1,0 +1,14 @@
+$("."+"<%= @user_artist.artist_id %>").html("<%= escape_javascript(link_to 'follow', user_artists_path(user_artist: {user_id: current_user.id, artist_id: @user_artist.artist_id}),  method: 'post', action: :create, class: 'button radius round tiny alert', remote: true) %>")
+
+$(".count").html("<%= escape_javascript(render('layouts/counts')) %>");
+$("#flash_messages").html("<%= escape_javascript(render('layouts/messages')) %>");
+
+
+$("#"+"<%= @user_artist.artist_id %>").html("")
+
+<% if params[:show] %>
+$(window.location.replace("/user_artists/artist_index"))
+<% end %>
+
+
+

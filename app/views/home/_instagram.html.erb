@@ -1,0 +1,15 @@
+
+
+<div id='instagram_timelines'>
+<%# cache "instagram_timelines#{Date.today}" do %>
+	<% @user.each do |ins| %>
+	  <%= image_tag ins.images.standard_resolution.url %><br>
+	  <strong><%= ins.user.username %> </strong><br>
+	  <strong><%= ins.id.slice(0..(ins.id.index('_')-1)) %> </strong><br>
+	  <strong><%= ins.caption.to_s.split('text="').last.to_s.slice(0..20) %> </strong><br>
+	  <strong><%= Time.at(ins.created_time.to_i) %> </strong><br>
+	
+	<% end %>
+<%# end %>
+</div>
+

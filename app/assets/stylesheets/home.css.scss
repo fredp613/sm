@@ -1,0 +1,51 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.contents:hover {
+	content:'';
+    /*color:#fff;*/
+    top:0; 
+    left:0;
+    background:rgba(0,0,0,0.9);
+    opacity:0.9;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+
+}
+
+.contents:hover h4 {
+	color: white;
+
+}
+.contents:hover h5 {
+	color: white;
+	
+}
+.contents:hover h6 {
+	color: white;
+	
+}
+
+.contents:hover .name_link {
+	color: white;
+}
+
+.row.full-width {
+  width: 90%;
+  max-width: 90%; 
+}
+
+.action_buttons {
+	display:none;
+}
+
+.bottom_info {
+	display: none;
+}
+
+.contents:hover .action_buttons {
+	display: block;
+	visibility: visible;
+
+}
