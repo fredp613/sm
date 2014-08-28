@@ -4,6 +4,7 @@ class Content < ActiveRecord::Base
   belongs_to :instagramposter
   belongs_to :twitterposter
   belongs_to :artist
+  has_many :deleted_contents
   
   default_scope  -> { order 'created_at DESC' }
   
@@ -94,6 +95,10 @@ class Content < ActiveRecord::Base
         end
       end
    end
+
+  def self.check_for_deleted
+    #run a query that verifies existing twitter_post_id and instagram_post_id to dataset
+  end
 
   def self.start_instagram
 

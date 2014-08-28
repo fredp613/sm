@@ -2,50 +2,75 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.contents:hover {
-	content:'';
-    /*color:#fff;*/
-    top:0; 
-    left:0;
-    background:rgba(0,0,0,0.9);
-    opacity:0.9;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
 
-}
+@media only screen 
+and (min-width : 1224px) {
 
-.contents:hover h4 {
-	color: white;
 
-}
-.contents:hover h5 {
-	color: white;
-	
-}
-.contents:hover h6 {
-	color: white;
-	
-}
+	.contents {
+	  display:block;
+	}
 
-.contents:hover .name_link {
-	color: white;
-}
 
-.row.full-width {
-  width: 90%;
-  max-width: 90%; 
-}
+	.contents:hover {
+		content:'';
+	    /*color:#fff;*/
+	    top:0; 
+	    left:0;
+	    background:rgba(0,0,0,0.9);
+	    opacity:0.9;
+	    transition: all 0.5s;
+	    -webkit-transition: all 0.5s;
 
-.action_buttons {
-	display:none;
-}
+	}
 
-.bottom_info {
-	display: none;
-}
+	.contents:hover h4 {
+		color: white;
 
-.contents:hover .action_buttons {
-	display: block;
-	visibility: visible;
+	}
+	.contents:hover h5 {
+		color: white;
+		
+	}
+	.contents:hover h6 {
+		color: white;
+		
+	}
+
+	.contents:hover .name_link {
+		color: white;
+	}
+
+	.row.full-width {
+	  width: 90%;
+	  max-width: 90%; 
+	}
+
+	.action_buttons {
+		color:white;
+		background:rgba(0,0,0,0.7);	
+		width:300px;
+		position:absolute;
+		margin: 90px
+	}
+
+	.action_buttons {
+		display:none;
+	}
+
+	.bottom_info {
+		display: none;
+	}
+
+	.contents:hover .action_buttons {
+		display: block;
+		visibility: visible;
+
+	}
+
+	.contents:hover blockquote {
+		color:white;
+		word-wrap:break-word;
+	}
 
 }

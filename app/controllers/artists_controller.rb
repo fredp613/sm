@@ -1,4 +1,8 @@
 class ArtistsController < ApplicationController
+  
+
+  http_basic_authenticate_with name: Rails.application.secrets.admin_name, password: Rails.application.secrets.admin_password
+
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
 
   # GET /artists
@@ -20,10 +24,13 @@ class ArtistsController < ApplicationController
   # GET /artists/new
   def new
     @artist = Artist.new
+    @artist.twitterposters.build
+    @artist.instagramposters.build
   end
 
   # GET /artists/1/edit
   def edit
+    
   end
 
   # POST /artists
@@ -74,6 +81,8 @@ class ArtistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artist_params
-      params.require(:artist).permit(:artist_name, :first_name, :last_name)
+      params.require(:artist).permit(:artist_name, :first_name, :last_name, 
+        :twitterposters_attributes => [:id, :user_id, :screen_name, :artist_id, :profile_image, :remote_profile_image_url], 
+        :instagramposters_attributes => [:id, :ig_id, :screen_name, :artist_id, :profile_image,:remote_profile_image_url])
     end
 end

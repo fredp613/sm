@@ -4,7 +4,7 @@
 	
 <div id='timeline' class='post large-4 columns'>
 
- <div class="panel contents" style='display:block;'>			 
+ <div class="panel contents">			 
   						              
  	<!-- link to below is to activate modal -->
  	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
@@ -12,7 +12,7 @@
  	   <!--  <div class='action_buttons' style='margin:30% 20%;position:absolute'> -->
         <% if user_signed_in? %>
          
-          <div class='action_buttons <%= c.id %>' style='color:white;background:rgba(0,0,0,0.7);margin:30% 16%;width:300px;position:absolute'>
+          <div class='large-12 columns action_buttons <%= c.id %> text-center'>
 
          <%= render partial: "home/action_buttons", locals: { :c => c }  %>
         
@@ -21,7 +21,7 @@
       <% end %>
      <!-- </div>  -->
 
-      <div class='post_image'>
+      <div class='post_image text-center'>
         <%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
     			<%= image_tag c.image_url(:main).to_s, class: '.test' %>
     		<%# end %>              
