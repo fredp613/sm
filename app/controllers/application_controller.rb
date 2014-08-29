@@ -15,6 +15,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :username
   end 
 
+  # def admin_authentication
+  #   http_basic_authenticate_with name: Rails.application.secrets.admin_name, password: Rails.application.secrets.admin_password
+  # end
+
+  def admin_authentication
+    authenticate_or_request_with_http_basic do |user_name, password|
+      user_name == Rails.application.secrets.admin_name && password == Rails.application.secrets.admin_password
+    end  #if RAILS_ENV == 'production' || params[:admin_http]
+  end
+
   private
   
   def set_counts

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-
   resources :user_contents do
     collection do
       get "user_contents_count" 
@@ -16,15 +15,14 @@ Rails.application.routes.draw do
     
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
-  
 
 
-  resources :artists 
+  # resources :artists 
 
 
 
   namespace :admin do 
-    resources :instagramposters, :twitterposters
+    resources :instagramposters, :twitterposters, :artists
   end
 
   get 'home/index'

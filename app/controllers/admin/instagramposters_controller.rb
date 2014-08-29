@@ -2,8 +2,9 @@ module Admin
 
 class InstagrampostersController < ApplicationController
   
-  http_basic_authenticate_with name: Rails.application.secrets.admin_name, password: Rails.application.secrets.admin_password
+  # http_basic_authenticate_with name: Rails.application.secrets.admin_name, password: Rails.application.secrets.admin_password
   before_action :set_instagramposter, only: [:show, :edit, :update, :destroy]
+  before_filter :admin_authentication
 
   # GET /instagramposters
   # GET /instagramposters.json
