@@ -41,6 +41,7 @@
   <body>
 
    <nav class="top-bar" data-topbar>
+    
     <ul class="title-area">
        
       <li class="name">
@@ -53,52 +54,20 @@
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
  
-    
+       
+    <section class="top-bar-section">            
+      <ul><%= render 'home/search_form' %></ul>        
+      <% if user_signed_in? %>                  
+        <ul class='count left'><%= render 'layouts/counts' %></ul>                
+      <% end %>  
+            
+       <ul class='right'><%= render 'home/authentication' %></ul>       
+    </section>
    
-    <section class="top-bar-section">
-    <% if user_signed_in? %>   
-      <ul>
-         <li class="has-dropdown">
-          <a class="active" href="#">Dashboard</a>
-            <ul class="dropdown">
-              <li><label>Favorites</label></li>
-              <li><%= link_to "Artists", artist_index_user_artists_path %></li>
-              <li><%= link_to "Content", user_contents_path %></li>
-                                                       
-            </ul>
-        </li>
 
-      </ul>
- 
-      <% end %>
-
-      <ul >
-        <li class="divider"></li>        
-              <%= render 'home/search_form' %>                       
-      </ul>
-    </section>
-
-    
-    <% if user_signed_in? %>
-    <section class="top-bar-section">          
-      <ul >
-      <li class="divider"></li>        
-      <div class='count'>
-        <%= render 'layouts/counts' %>
-      </div>    
-      </ul>
-    </section>
-    <% end %>
-
-
-
-    <section class="top-bar-section">
-           <%= render 'home/authentication' %>
-      
-    </section>
   </nav>
   
-  <div class="row full-width" style='margin-top:80px'>
+  <div class="row full-width clear" style='margin-top:80px'>
     <%# Rails flash messages styled for Zurb Foundation %>      
         <div id='flash_messages'><%= render 'layouts/messages' %></div>
     <%= yield %>
@@ -113,7 +82,7 @@
       <hr/>
       <div class="row">
         <div class="large-6 columns">
-          <p>© Copyright no one at all. Go to town.</p>
+          
         </div>
         <div class="large-6 columns">
           <ul class="inline-list right">

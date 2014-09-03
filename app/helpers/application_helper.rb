@@ -14,4 +14,15 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def markdown(content)
+    options = [autolink: true, hard_wrap: true, filter_html: true, safe_links_only: true]
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, *options )
+    
+    content_tag(:blockquote) do
+      @markdown.render(content).html_safe
+    end
+  end
+
+  
 end

@@ -10,15 +10,12 @@
  	<%#= link_to "#", 'data-reveal-id' => 'modal', remote: true do %>
          
  	   <!--  <div class='action_buttons' style='margin:30% 20%;position:absolute'> -->
-        <% if user_signed_in? %>
+        <%# if user_signed_in? %>
          
-          <div class='large-12 columns action_buttons <%= c.id %> text-center'>
-
-         <%= render partial: "home/action_buttons", locals: { :c => c }  %>
-        
-         
-          </div>
-      <% end %>
+      <div class='action_buttons <%= c.id %> text-center'>
+         <%= render partial: "home/action_buttons", locals: { :c => c }  %>         
+      </div>
+      <%# end %>
      <!-- </div>  -->
 
       <div class='post_image text-center'>
@@ -26,13 +23,27 @@
     			<%= image_tag c.image_url(:main).to_s, class: '.test' %>
     		<%# end %>              
   		</div>
-      <p class='bottom-info'>
-            <%= link_to user_artists_path(artist_id: c.artist.id) do %>
-              <h4><%= c.artist.artist_name %></h4>
-              <h5><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
-              <h6><%= c.created_at.to_date %></h6>                
-            <% end %> 
-        </p>
+      
+
+        <div class='row'>  
+          <div class='bottom-info' style='float:left; margin: 10px'>
+           <%= link_to user_artists_path(artist_id: c.artist.id) do %>
+             <h4><%= c.artist.artist_name %></h4>
+             <h5 style='word-wrap:break-word;'><%= c.user_name.to_s + " via " + c.social_media_site.to_s %></h5>
+             <h6><%= c.created_at.to_date %></h6>                
+           <% end %> 
+           </div>
+         
+           <div class='profile_image' style='float:right'>
+             <% if c.twitterposter %>
+             <%= image_tag c.twitterposter.profile_image_url(:thumb).to_s, size: '100x100', style: 'margin:10px 16px 0 0' %>
+             <% else %>
+             <%= image_tag c.instagramposter.profile_image_url(:thumb).to_s, size: '100x100', style: 'margin:10px 16px 0 0'  %>
+             <% end %>
+           </div>
+       </div>
+
+      
       
 
   

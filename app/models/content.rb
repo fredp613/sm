@@ -14,6 +14,13 @@ class Content < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   attr_accessor :remove_image
   
+  def self.instagram_content
+    where(:twitterposter_id => nil)
+  end
+
+  def self.twitter_content
+    where(:instagramposter_id => nil)
+  end
 
   def self.run_job
     Resque..enqueue_in(5.seconds, BackgroundProcess)    
@@ -85,7 +92,7 @@ class Content < ActiveRecord::Base
               # user_id: ig.user.id,
               # user_name: ig.user.username,
               post_id: ig.id.slice(0..(ig.id.index('_').to_i-1)),
-              remote_image_url:ig.images.standard_resolution.url.to_s,
+              remote_profile_image_url:ig.images.standard_resolution.url.to_s,
               text:media_text_final,
               instagramposter_id: p.id,
               artist_id: p.artist.id,
@@ -96,9 +103,72 @@ class Content < ActiveRecord::Base
       end
    end
 
+
+   # you need to test this
   def self.check_for_deleted
     #run a query that verifies existing twitter_post_id and instagram_post_id to dataset
+    instagram_client = start_instagram
+    poster = Instagramposter.all
+    content_last_date = Content.instagram_content.order(:created_at).first.created_at
+    scoped_contents = Content.instagram_content.where('created_at < ?', content_last_date)
+    scoped_ig_post_ids = Array.new
+    deleted_content = Array.new
+
+    poster.each do |p|
+      #might have to supply count argument here
+      instagram_client.user_recent_media(p.ig_id.to_s, count: 200).each_with_index do |ig, i|
+        
+        if (ig.created_time.to_i < content_last_date.to_i) 
+          scoped_ig_post_ids.push(ig.id.slice(0..(ig.id.index('_').to_i-1)))        
+        end
+      end
+    end
+
+    # deleted_content = scoped_contents.map(&:post_id).to_a scoped_ig_post_ids
+    deleted_content = scoped_contents.map(&:post_id).reject { |a| a = scoped_ig_post_ids }
+
+    return deleted_content
+    # deleted_content.each do |dc|
+    #   c = Content.where(post_id: dc).first
+    #   c.deleted = true
+    #   c.save!
+    # end 
   end
+
+  
+  def self.ig_fetch_profile_images
+    instagram_client = start_instagram
+    poster = Instagramposter.all
+
+    poster.each do |p|
+      #might try user search here instead
+      profile_image = instagram_client.user_recent_media(p.ig_id.to_s, count: 1).first.user.profile_picture
+
+      if profile_image != p.profile_image
+        po = Instagramposter.where(ig_id: p.ig_id).first
+        po.remote_profile_image_url = profile_image
+        po.save!
+      end
+    end
+  end
+
+
+  #you need to test this
+  def self.twitter_fetch_profile_images
+    twitter_client = start_twitter
+    poster = Twitterposter.all
+
+    poster.each do |p|
+      #might try user search here instead
+      profile_image = twitter_client.user(p.user_id).profile_image_url
+
+      if profile_image != p.profile_image
+        po = Twitterposter.where(user_id: p.user_id).first
+        po.remote_profile_image_url = profile_image
+        po.save!
+      end
+    end
+  end 
 
   def self.start_instagram
 

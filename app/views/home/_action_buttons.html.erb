@@ -1,34 +1,49 @@
 <!-- <div style='clear:both'></div> -->
  <div class='large-12 columns'>
    
-<blockquote><%= c.text.split[0..20].join(' ') %>
- <% if c.text.split.any? { |s| s.length > 20 } %>
-  ...
- <% end %>
-</blockquote>
 
 
-    <div class='large-4 columns <%= c.artist_id %>'><% if c.following(current_user) == true %>
+
+<%= markdown(c.text) %>
+
+<%#= markdown(@project.projectdesc) %>
+
+
+    <div class='large-4 columns <%= c.artist_id %>'>
+    <% if user_signed_in? %>
+
+      <% if c.following(current_user) == true %>
        <%= link_to "following", user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: c.artist_id).first.id), method: 'delete', class: "button radius round tiny following_state info", 
-           remote: true %>
-        
+           remote: true %>      
        <% else %>
-    
           <%= link_to "follow", user_artists_path(user_artist: {user_id: current_user.id, artist_id: c.artist_id}),  method: 'post', action: :create, class: "button radius round tiny alert ", remote: true %>
        <% end %>
+
+    <% else %>
+         <%= link_to "follow", nil, 'data-reveal-id' => 'modal', id: 'btnAddArtist_login', class: "button radius round tiny alert", remote: true %> 
+         
+    <% end %>
 
      </div>
   
 
      <div class='large-8 columns content_btns'>
-     <% if c.favorite(current_user.id) == true %>
-    <%= link_to "Saved to favorites", user_content_path(UserContent.where(:user_id=>current_user.id).where(:content_id=>c.id).first.id), 
-    method: 'delete', class: 'button radius round tiny info', remote: true %> 
-     <% else %>
-     <%= link_to "Add to favorites", user_contents_path(user_content: {user_id: current_user.id, content_id: c.id }), method: 'post', action: :create, class: 'button radius round tiny success', remote: true %>
+    
+    <% if user_signed_in? %>
+       
+       <% if c.favorite(current_user.id) == true %>
+        <%= link_to "Saved to favorites", user_content_path(UserContent.where(:user_id=>current_user.id).where(:content_id=>c.id).first.id), 
+        method: 'delete', class: 'button radius round tiny info', remote: true %> 
+         <% else %>
+         <%= link_to "Add to favorites", user_contents_path(user_content: {user_id: current_user.id, content_id: c.id }), method: 'post', action: :create, class: 'button radius round tiny success', remote: true %>
+       <% end %>
 
-     <% end %>
+    <% else %>
+       <%= link_to "Add to favorites",nil, 'data-reveal-id' => 'modal', id: 'btnAddFavorite_login', class: 'button radius round tiny success', remote: true %> 
+    <% end %>
      </div>
 
+
+
 </div>
- <div style='clear:both'></div>
+ <!-- <div style='clear:both'></div> -->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828232100) do
+ActiveRecord::Schema.define(version: 20140902184002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140828232100) do
     t.integer  "instagramposter_id"
     t.integer  "twitterposter_id"
     t.integer  "artist_id"
+    t.boolean  "deleted"
   end
 
   create_table "deleted_contents", force: true do |t|

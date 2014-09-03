@@ -1,19 +1,24 @@
 
-<div class='right'>
+
 <% if user_signed_in? %>
-	 <ul>
+	 
 	     <li class="has-dropdown">
 	      <a class="active" href="#"><%= current_user.username %></a>
-	        <ul class="dropdown">
-	          <li><label>Actions</label></li>
+	        <ul class="dropdown">	          
 	          <li><%= link_to 'Edit profile', edit_user_registration_path,style: 'color:white;' %></li>
 	          <li><%= link_to "Logout", destroy_user_session_path, method: :delete,style: 'color:white;' %></li>	          
 	        </ul>
 	    </li>
 
-	   </ul>
+	 
 <% else %>
  <%#= link_to "Sign up", new_user_registration_path %> |
  <%#= link_to "Login", new_user_session_path %>
-  <%= link_to "Sign in with twitter", user_omniauth_authorize_path(:twitter), style: 'color:white;' %>
-<% end %></div>
+
+ 
+ 	<li><%= link_to "Sign in with twitter", user_omniauth_authorize_path(:twitter), style: 'color:white;' %></li>
+ 
+
+<% end %>
+
+

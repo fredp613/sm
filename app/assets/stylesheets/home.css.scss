@@ -47,11 +47,8 @@ and (min-width : 1224px) {
 	}
 
 	.action_buttons {
-		color:white;
-		background:rgba(0,0,0,0.7);	
-		width:300px;
-		position:absolute;
-		margin: 90px
+		
+		
 	}
 
 	.action_buttons {
@@ -65,10 +62,16 @@ and (min-width : 1224px) {
 	.contents:hover .action_buttons {
 		display: block;
 		visibility: visible;
+		color:white;
+		background:rgba(0,0,0,0.7);	
+		width:300px;	
+		margin: 120px 70px ;
+
+		position:absolute;
 
 	}
 
-	.contents:hover blockquote {
+	.contents:hover blockquote p {
 		color:white;
 		word-wrap:break-word;
 	}
