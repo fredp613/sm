@@ -44,7 +44,7 @@
     
     <ul class="title-area">
        
-      <li class="name">
+      <li class="name" style='margin-top:5px'>
         <h1>
           <a href="/">
             Rap Life
@@ -56,12 +56,14 @@
  
        
     <section class="top-bar-section">            
+     
       <ul><%= render 'home/search_form' %></ul>        
       <% if user_signed_in? %>                  
         <ul class='count left'><%= render 'layouts/counts' %></ul>                
       <% end %>  
             
        <ul class='right'><%= render 'home/authentication' %></ul>       
+
     </section>
    
 

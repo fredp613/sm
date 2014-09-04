@@ -15,8 +15,12 @@
  <%#= link_to "Sign up", new_user_registration_path %> |
  <%#= link_to "Login", new_user_session_path %>
 
- 
- 	<li><%= link_to "Sign in with twitter", user_omniauth_authorize_path(:twitter), style: 'color:white;' %></li>
+  <li style='color:white;margin-top:10px'><span>Sign in through</span></li> 
+ 	<li><%= link_to image_tag("twitter-icon.png", :border => 0, :size=>'35x35'), user_omniauth_authorize_path(:twitter), style: 'color:white;' %></li>
+    <!-- <li class='divider'></li> -->
+    <li><%= link_to image_tag("instagram_icon.png", :border => 0, :size=>'35x35'), user_omniauth_authorize_path(:twitter), style: 'color:white;' %></li>
+    <!-- <li class='divider'></li> -->
+    <li><%= link_to image_tag("google-icon.ico", :border => 0, :size=>'35x35'), user_omniauth_authorize_path(:twitter), style: 'color:white;' %></li>
  
 
 <% end %>
