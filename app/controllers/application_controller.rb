@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def admin_authentication
     authenticate_or_request_with_http_basic do |user_name, password|
-      user_name == Rails.application.secrets.admin_name && password == Rails.application.secrets.admin_password
+      user_name == ENV["admin_name"] && password == ENV["admin_password"]
     end  #if RAILS_ENV == 'production' || params[:admin_http]
   end
 
