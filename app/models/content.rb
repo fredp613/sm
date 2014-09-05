@@ -92,7 +92,7 @@ class Content < ActiveRecord::Base
               # user_id: ig.user.id,
               # user_name: ig.user.username,
               post_id: ig.id.slice(0..(ig.id.index('_').to_i-1)),
-              remote_profile_image_url:ig.images.standard_resolution.url.to_s,
+              remote_image_url:ig.images.standard_resolution.url.to_s,
               text:media_text_final,
               instagramposter_id: p.id,
               artist_id: p.artist.id,
