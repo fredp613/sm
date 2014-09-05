@@ -38,3 +38,6 @@ config/secrets.yml
 #vagrant
 Vagrantfile
 .vagrant
+
+# Ignore application configuration
+/config/application.yml

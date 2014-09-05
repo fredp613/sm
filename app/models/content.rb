@@ -173,20 +173,20 @@ class Content < ActiveRecord::Base
   def self.start_instagram
 
     Instagram.configure do |config|
-      config.client_id = Rails.application.secrets.instagram_api_key
-      config.access_token = Rails.application.secrets.instagram_api_secret
+      config.client_id = ENV["instagram_api_key"]#Rails.application.secrets.instagram_api_key
+      config.access_token = ENV["instagram_api_secret"]#Rails.application.secrets.instagram_api_secret
     end 
-    @instagram_client = Instagram.client(:access_token => Rails.application.secrets.instagram_api_token)
+    @instagram_client = Instagram.client(:access_token => ENV["instagram_api_token"]  )#Rails.application.secrets.instagram_api_token)
   end
 
       
 
   def self.start_twitter
     @twitter_client = Twitter::REST::Client.new do |config|
-      config.consumer_key    = Rails.application.secrets.twitter_api_key
-      config.consumer_secret = Rails.application.secrets.twitter_api_secret
-      oauth_token = Rails.application.secrets.twitter_api_token
-      oauth_token_secret = Rails.application.secrets.twitter_api_token_secret
+      config.consumer_key    = ENV["twitter_api_key"] #Rails.application.secrets.twitter_api_key
+      config.consumer_secret = ENV["twitter_api_secret"] #Rails.application.secrets.twitter_api_secret
+      oauth_token = ENV["twitter_api_token"] #Rails.application.secrets.twitter_api_token
+      oauth_token_secret = ENV["twitter_api_token_secret"] #Rails.application.secrets.twitter_api_token_secret
     end
   end
 
