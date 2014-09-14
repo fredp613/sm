@@ -234,6 +234,13 @@ class Content < ActiveRecord::Base
     end    
   end
 
+  def self.by_artist_for_user_collection(user)
+    user_artists = UserArtist.where(user_id: user).map(&:artist_id)
+
+    self.where(artist_id: user_artists)
+
+
+  end
   
 
 end

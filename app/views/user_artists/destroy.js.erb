@@ -3,8 +3,14 @@ $("."+"<%= @user_artist.artist_id %>").html("<%= escape_javascript(link_to 'foll
 $(".count").html("<%= escape_javascript(render('layouts/counts')) %>");
 $("#flash_messages").html("<%= escape_javascript(render('layouts/messages')) %>");
 
+// $("#user_artists_container").html("<%= escape_javascript(render('user_artists/user_artists')) %>");
+$("#user_artists_container").html("")
+$("#user_artists_container").html("<%= j render('user_artists') %>");
+
 
 $("#"+"<%= @user_artist.artist_id %>").html("")
+
+
 
 <% if params[:show] %>
 $(window.location.replace("/user_artists/artist_index"))

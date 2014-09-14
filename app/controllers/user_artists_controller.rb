@@ -17,6 +17,9 @@ class UserArtistsController < ApplicationController
 
   def artist_index
     @user_artists = current_user.artists.all.page(params[:page]).per(10)
+    if params[:scoped]
+      @contents = Content.by_artist_for_user_collection(current_user).all.page(params[:page]).per(21)
+    end
   end  
   
 
@@ -81,8 +84,13 @@ class UserArtistsController < ApplicationController
   # DELETE /user_artists/1.json
   def destroy
      @user_artists = current_user.artists.all.page(params[:page]).per(10)
-     @contents = Content.all.page(params[:page]).per(10)
+     # @contents = Content.all.page(params[:page]).per(10)
     
+     if params[:scoped]
+      @contents = Content.by_artist_for_user_collection(current_user).all.page(params[:page]).per(21)
+     else
+      @contents = Content.all.page(params[:page]).per(10)
+     end
 
     if @user_artist.destroy
         respond_to do |format|

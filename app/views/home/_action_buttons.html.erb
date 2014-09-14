@@ -13,8 +13,20 @@
     <% if user_signed_in? %>
 
       <% if c.following(current_user) == true %>
-       <%= link_to "following", user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: c.artist_id).first.id), method: 'delete', class: "button radius round tiny following_state info", 
+
+      <% if params[:scoped] %>
+       <%= link_to "unfollow", user_artist_path(id: UserArtist.where(user_id: current_user.id).where(artist_id: c.artist_id).first.id, scoped: true), method: 'delete', class: "button radius round tiny following_state info", 
            remote: true %>      
+      
+      <% else %>
+
+        <%= link_to "unfollow", user_artist_path(UserArtist.where(user_id: current_user.id).where(artist_id: c.artist_id).first.id), method: 'delete', class: "button radius round tiny following_state info", 
+           remote: true %>      
+
+      <% end %>
+      
+
+
        <% else %>
           <%= link_to "follow", user_artists_path(user_artist: {user_id: current_user.id, artist_id: c.artist_id}),  method: 'post', action: :create, class: "button radius round tiny alert ", remote: true %>
        <% end %>

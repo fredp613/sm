@@ -1,0 +1,36 @@
+<div id='<%= a.id %>' class='artist'>
+     <div class="large-12 columns">
+
+                <div class='panel large-6 columns' style='height:350px'>
+
+                     <h4><%= a.artist_name %></h4> 
+                     <h5><%= "Full Name:" + a.first_name + " " + a.last_name %></h5>                    
+                     <strong>Artist Bio: </strong><blockquote  style='text-overflow: ellipsis;'>
+                     Lorem ipsum dolor sit amet, consecsadfasfsadfsadfsfdtetur adipisicing elit, sed do eiusmod
+                     tempor incididunt ut labor sint occaecat cupidatat non
+                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.t occaecat cupidatat non
+                     proident, sunt in culpa qui officia deset occaecat cupidatat non
+                     proident, sunt in culpa qui officia deset</blockquote>                     
+
+                 <p>
+                    <%= link_to "View All Content", user_artists_path(artist_id: a.id), class: "button radius round success tiny btnViewArtistContent"  %>
+                    <%= link_to "Unfollow", user_artist_path(a.user_artists.first.id), method: :delete, class: "button radius round alert tiny btnUnfollow",
+                    remote: true, id: 'btnUnfollow'  %>
+
+                    <% unless Content.favorites(current_user).where(artist_id: a.id).blank? %>
+                    <%= link_to "View Saved Content", user_contents_path(artist_id: a.id), class: "button radius round info tiny btnViewSavedContent", style: 'color:white;'  %>
+                    <% end %>
+                  <%#need to get this from twiter= image_tag a.first.profil_image_url.to_s %>
+
+                 </p>                  
+
+               </div>
+
+           <!-- <fieldset><legend>Most Recent Post Pic</legend> -->
+           <div class='large-6 columns'><%= image_tag a.contents.first.image_url(:main).to_s, style: 'height:350px' %></div>
+           <!-- </fieldset> -->
+
+
+
+     </div>
+    </div>
