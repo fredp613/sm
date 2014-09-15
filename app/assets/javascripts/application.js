@@ -26,8 +26,15 @@ ready = function() {
 
   $("#flash").fadeOut(3000); 
   $(document).foundation();  
+  $('#text_content').find('a').each(function() {
+    $(this).attr("target", "_blank");
+  });
   
 }
+
+// $('blockquote p a').attr('target','_blank');
+
+
 
 $(document).on('page:load', ready);
 $(document).ready(ready);

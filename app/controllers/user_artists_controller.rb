@@ -86,16 +86,20 @@ class UserArtistsController < ApplicationController
      @user_artists = current_user.artists.all.page(params[:page]).per(10)
      # @contents = Content.all.page(params[:page]).per(10)
     
-     if params[:scoped]
-      @contents = Content.by_artist_for_user_collection(current_user).all.page(params[:page]).per(21)
-     else
+     # if params[:scoped]
+      # @contents = Content.by_artist_for_user_collection(current_user).all.page(params[:page]).per(21)
+     # else
       @contents = Content.all.page(params[:page]).per(10)
-     end
+     # end
 
     if @user_artist.destroy
         respond_to do |format|
-          set_counts
-          @content = Content.where(id: params[:content_id]).first
+          if params[:scoped]
+            @contents = Content.by_artist_for_user_collection(current_user).all.page(params[:page]).per(21)
+          else
+            @content = Content.where(id: params[:content_id]).first
+          end
+          set_counts          
           format.html { redirect_to home_index_path, notice: 'Artist was successfully destroyed.' }
           format.json { render json: @user_artist }      
           format.js

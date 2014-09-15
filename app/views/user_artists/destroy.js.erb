@@ -16,5 +16,9 @@ $("#"+"<%= @user_artist.artist_id %>").html("")
 $(window.location.replace("/user_artists/artist_index"))
 <% end %>
 
+<% unless @contents.count > 0 %>
+$(window.location.replace("/"))
+<% end %>
+
 
 

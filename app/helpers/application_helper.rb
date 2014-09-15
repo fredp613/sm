@@ -19,7 +19,7 @@ module ApplicationHelper
     options = [autolink: true, hard_wrap: true, filter_html: true, safe_links_only: true]
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, *options )
     
-    content_tag(:blockquote) do
+    content_tag(:blockquote, id: 'text_content') do
       @markdown.render(content).html_safe
     end
   end
